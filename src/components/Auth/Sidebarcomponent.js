@@ -4,6 +4,7 @@ import React from 'react'
 import {
   Link
   } from "react-router-dom";
+import authService from '../../_services/auth.service';
 
 export default function SideBarComponent() {
     const closeNav = () => {
@@ -69,7 +70,7 @@ export default function SideBarComponent() {
                     </li> 
                 
                     <li className="nav-item mt-3">
-                    <Link href="/"><a className="nav-link" ><i className="fas fa-user mr-3"></i> Logout  <i className="fa fa-chevron-right float-right"></i></a></Link>
+                    <Link href="/"><a className="nav-link" onClick={authService.logout} ><i className="fas fa-user mr-3"></i> Logout  <i className="fa fa-chevron-right float-right"></i></a></Link>
                     </li> 
                     <li className="nav-item mt-3">
                         <hr className="float-left" />

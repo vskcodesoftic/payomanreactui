@@ -1,15 +1,17 @@
 import React from 'react'
 
 import { useState , useRef } from 'react';
+import { useHistory } from 'react-router';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import AuthService from "../../_services/auth.service";
 
  
 
-const LoginComponent = () => {
-
+const LoginComponent = (props) => {
+const history = useHistory()
     const emailInputRef = useRef('')
     const passwordInputRef = useRef('')
 
@@ -22,7 +24,24 @@ const LoginComponent = () => {
      
        //optional  add validtion
      
-     
+       AuthService.login(enteredEmail, entredPassword).then(
+        () => {
+        toast.success("logged in sucessfully ")
+
+         history.push("/profile");
+          window.location.reload();
+        },
+        (error) => {
+            toast.warn(`failed login ${error.response.data.message}`)
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+        }
+      );
         
       }
 
