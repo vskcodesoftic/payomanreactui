@@ -1,38 +1,262 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* login in page Css Start */
+.banner
+{
+    height: 300px; 
+    background-color:#000000;
+   
 }
+.logo-column
+{
+    margin-top: 40px;
+}
+.logo-column img
+{
+   /* width: 80%; */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+}
+.forn-container
+{
+     background-color: #ffffff; 
+     margin-top: -8%!important;
+    width: 80%; 
+    margin:auto; 
+    border: 1px solid #969595;
+    border-radius: 5px;
+}
+.success-btn
+{
+    background-color:#cc4521;
+    color:#ffffff;
+    border-radius: 50px;
+}
+.btn-link
+{
+    background-color:#cc4521;
+    border-radius: 50px;
+    color: #ffffff;
+    
+}
+.btn-link a{
+    color: #ffffff;
+}
+.input-box
+{
+     border:1px solid #969595;
+}
+.forgot-sec a
+{
+  text-decoration: none!important;
+  color: #65676b;
+}
+/* login in page Css End */
+
+
+/* Sign up page Css Start */
+  .nav-link a{
+      text-decoration: none;
+      color: #ffffff!important;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .nav
+  {
+      background-color: #cc4521;
   }
-  to {
-    transform: rotate(360deg);
+/* Sign up page Css Start */
+
+
+
+/*  Navbar Section Start*/
+   .navbar
+   {
+       background-color:#cc4521;
+   }
+   .nav-link
+   {
+       color:#65676b;
+       font-size: 18px!important;
+   }
+   .nav-item a
+   {
+      color: #65676b;
+   }
+   .navbar-sec
+   {
+       color:black !important;
+   }
+   
+/* Navbar Section End */
+
+
+
+
+/* code Scaner Section Start */
+  .code-scaner-sec
+  {
+      background-color: #cc4521;
+      
   }
+  .code-scaner-container
+  {
+      background-color: #ffffff;
+  }
+  
+
+/* Code Scaner Section End */
+
+/* Wallet Section Start */
+.wallet-card
+ {
+   background-color:#cc4521;
+   border-radius: 5px;
+ }
+ .navbar-sec
+ {
+     background-color: #ffffff;
+     color: black!important;
+ }
+ .nav-link-new a
+ {
+   color:#000000;
+ }
+ .received-money-button
+ {
+     background-color:#cc4521;
+     border: none;
+     color: #ffffff;
+     border-radius:20px;
+ }
+/* Wallet Section End */
+
+
+
+/* Received amount Section*/
+   .show-button
+   {
+       border-radius: 20px;
+       margin-top: 50%;
+   }
+/* Received amount Section*/
+
+
+/* support section start */
+  .support-content
+  {
+      color: #65676b;
+      margin-top: 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+  }
+  .title-list
+  {
+      text-decoration: none!important;
+  }
+  .company-list ul
+  {
+     text-decoration: none!important;
+  }  
+  .list li{
+      list-style: none;
+      color: #65676b;
+  }
+  .company-list a
+  {
+    text-decoration: none;
+    color: #65676b;
+  }
+  
+  
+/* Support Section End */
+
+
+
+
+
+@media only screen and (max-width: 768px)
+{
+    .forn-container
+    {   
+       background-color: #ffffff; 
+       margin-top: -40%!important; 
+       width: 80%; 
+       margin:auto; 
+       border: 1px solid #969595;
+    }
+   .banner
+    {
+      height: 350px; 
+      background-color:#000000;
+    }
+    .code-scaner-container
+    {
+        width: 90%;
+        margin:auto;
+    }
+    .nav-container
+    {
+        width: 100%;
+        margin:auto;
+    }
 }
+
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #cc4521;
+    overflow-x: hidden;
+    transition: 0.5s;
+    
+  }
+  .top-sec
+  {
+      background-color: #cc4521;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: relative;
+    
+    right: 25px;
+    font-size: 20px;
+    color: #ffffff;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #111;
+    padding: 10px 15px;
+    border: none;
+  }
+  .links
+  {
+      background-color: #ffffff;
+      margin-top: 10%!important;
+  }
+  .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 1px;}
+    
+  }
