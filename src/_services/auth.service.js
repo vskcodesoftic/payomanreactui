@@ -37,7 +37,7 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
-  window.location.replace('/')
+  window.location.replace('/auth')
 };
 
 const getCurrentUser = () => {

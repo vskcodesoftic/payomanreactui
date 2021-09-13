@@ -47,30 +47,30 @@ export default function SideBarComponent() {
                 <div className=" " id="collapsibleNavbar">
                     <ul className="navbar-nav">
                       <li className="nav-item mt-3 ">
-                        <Link href="/"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
+                        <Link to="/"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>
                       <li className="nav-item mt-3">
-                      <Link href="/Profile"><a className="nav-link" ><i className="fas fa-user mr-3"></i> Profile <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/profile"> Profile </Link>
                       </li>
                       <li className="nav-item mt-3">
-                      <Link href="/BankDetail"><a className="nav-link"><i className="fas fa-bank mr-3"></i> Bank Details <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/bankDetail"><a className="nav-link"><i className="fas fa-bank mr-3"></i> Bank Details <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li> 
                        
                       <li className="nav-item mt-3">
-                      <Link href="/ReceivedAmount"><a className="nav-link" ><i className="fas fa-money mr-3"></i> Received Amounts <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/receivedAmounts"><a className="nav-link" ><i className="fas fa-money mr-3"></i> Received Amounts <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li> 
                       <li className="nav-item mt-3">
-                      <Link href="/ChangePassword"><a className="nav-link" ><i className="fas fa-key mr-3"></i> Change Password <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/ChangePassword"><a className="nav-link" ><i className="fas fa-key mr-3"></i> Change Password <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>    
                       <li className="nav-item mt-3">
-                      <Link href="/Privacy"><a className="nav-link" ><i className="fas fa-lock mr-3"></i> Privacy and Security <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/privacyPolicy"><a className="nav-link" ><i className="fas fa-lock mr-3"></i> Privacy and Security <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li> 
                       <li className="nav-item mt-3">
-                      <Link href="/Support"><a className="nav-link" ><i className="fas fa-headphones mr-3"></i> Support <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/Support"><a className="nav-link" ><i className="fas fa-headphones mr-3"></i> Support <i className="fa fa-chevron-right float-right"></i></a></Link>
                     </li> 
                 
                     <li className="nav-item mt-3">
-                    <Link href="/"><a className="nav-link" onClick={authService.logout} ><i className="fas fa-user mr-3"></i> Logout  <i className="fa fa-chevron-right float-right"></i></a></Link>
+                    <Link to="/"><a className="nav-link" onClick={authService.logout} ><i className="fas fa-user mr-3"></i> Logout  <i className="fa fa-chevron-right float-right"></i></a></Link>
                     </li> 
                     <li className="nav-item mt-3">
                         <hr className="float-left" />

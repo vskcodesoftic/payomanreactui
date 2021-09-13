@@ -18,14 +18,14 @@ import ChangePasswordComponent from '../components/Auth/ChangePasswordComponent'
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import SupportPage from '../pages/SupportPage';
 import AuthService from '../_services/auth.service';
-import { PrivateRoute } from '../components/PrivateRoutes/PrivateRoute';
+import  ProtectedRoute  from '../components/PrivateRoutes/PrivateRoute';
 import NotFound from '../pages/NotFound';
+import BankDetailComponent from '../components/Bankdetail/BankDetail';
   
 
 
 function NoMatch() {
     let location = useLocation();
-  
     return (
       <div>
         <center><h3>
@@ -55,23 +55,18 @@ const Routes = () => {
             
               <Switch>
               {/* <Route exact path='/' component={HomePage} /> */}
-              {CurrentUser ? (
-                  <>
-              <Route exact path='/dashboard' component={DashboardPage} />
-              <Route exact path='/profile' component={ProfilePage} />
-              <Route exact path = '/receivedAmounts' component={RecievedAmountsPage}  />
-              <Route exact path = '/sidebar' component={Sidebar}  />
-               <Route exact path ='/signup' component={SignupComponent} />
-               <Route exact path ='/changePassword' component={ChangePasswordComponent} />
-               <Route exact path ='/privacyPolicy' component={PrivacyPolicy} />
-               <Route exact path ='/support' component={SupportPage} />
-               <Route exact path='/' >
-                   <Redirect to="/dashboard" />
-               </Route>
-             </> ) : ( <>
+              <Route exact path="/auth" component={AuthPage} />
+              <ProtectedRoute exact path='/' component={DashboardPage} />
+              <ProtectedRoute exact path='/profile' component={ProfilePage} />
+              <ProtectedRoute exact path = '/receivedAmounts' component={RecievedAmountsPage}  />
+              <ProtectedRoute exact path = '/sidebar' component={Sidebar}  />
+               <ProtectedRoute exact path ='/signup' component={SignupComponent} />
+               <ProtectedRoute exact path ='/changePassword' component={ChangePasswordComponent} />
+               <ProtectedRoute exact path ='/privacyPolicy' component={PrivacyPolicy} />
+               <ProtectedRoute exact path ='/support' component={SupportPage} />
+               <ProtectedRoute exact path ='/bankDetail' component={BankDetailComponent} />
 
-               <Route exact path="/" component={AuthPage} />
-            </>  )}
+           
          
         
             </Switch>

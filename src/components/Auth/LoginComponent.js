@@ -28,7 +28,7 @@ const history = useHistory()
         () => {
         toast.success("logged in sucessfully ")
 
-         history.push("/profile");
+         history.push("/");
           window.location.reload();
         },
         (error) => {
