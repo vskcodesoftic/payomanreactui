@@ -7,6 +7,8 @@ import {
 import authService from '../../_services/auth.service';
 
 export default function SideBarComponent() {
+
+
     const closeNav = () => {
         document.getElementById("mySidebar").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
@@ -50,7 +52,7 @@ export default function SideBarComponent() {
                         <Link to="/"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>
                       <li className="nav-item mt-3">
-                      <Link to="/profile"> Profile </Link>
+                      <Link to="/profile"><a className="nav-link"><i className="fas fa-user mr-3"></i>  Profile <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>
                       <li className="nav-item mt-3">
                       <Link to="/bankDetail"><a className="nav-link"><i className="fas fa-bank mr-3"></i> Bank Details <i className="fa fa-chevron-right float-right"></i></a></Link>

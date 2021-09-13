@@ -19,6 +19,8 @@ export const authenticationService = {
 };
 
 
+
+
 const login = (email, password) => {
   return axios
     .post(API_URL + "login", {
@@ -28,7 +30,7 @@ const login = (email, password) => {
     .then((response) => {
       console.log("data",response.data)
       if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("userData", JSON.stringify(response.data));
       }
 
       return response.data;
@@ -36,12 +38,12 @@ const login = (email, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("userData");
   window.location.replace('/auth')
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(localStorage.getItem("userData"));
 };
 
 export default {

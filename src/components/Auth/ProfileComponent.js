@@ -5,38 +5,85 @@ import { useForm } from "react-hook-form";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import authService, { authenticationService } from "../../_services/auth.service";
 
-export const ProfileComponent = (props) => {
-  const baseUrl = "https://payoman.com";
 
-  const { register, handleSubmit } = useForm({})
+
+
+export const ProfileComponent =  (props) => {
+
+  
+  const baseUrl = "http://localhost:8001";
+ 
 
 //   const userEmailIdentity = props.userEmailId;
 
-//   const userProfileData = props.profileData;
+const nameUser = props.name;
+console.log("name prop", nameUser)
+const [Data, setData] = useState('')
 
-//   let bankName = userProfileData.bankName;
-//   let businessName = userProfileData.businessName;
-//   let countryCode = userProfileData.countryCode;
-//   let useremail = userProfileData.email;
-//   let usermessage = userProfileData.message;
-//   let userfullname = userProfileData.name;
-//   let phoneNumber = userProfileData.phoneNumber;
-//   let profilePic = userProfileData.profilePic;
-//   let useraccountNumber = userProfileData.accountNumber;
-//   let userswiftCode = userProfileData.swiftCode;
+const [users, setUsers] = useState({ email: "", name: '' });
 
-//   const { register, handleSubmit } = useForm({
-//     defaultValues: {
-//       accountNumber: `${useraccountNumber}`,
-//       bankName: `${bankName}`,
-//       businessName: `${businessName}`,
-//       countryCode: `${countryCode}`,
-//       name: `${userfullname}`,
-//       swiftCode: `${userswiftCode}`,
-//       phoneNumber: `${phoneNumber}`,
-//     },
-//   });
+let nameUserId ;
+let userBankName ;
+
+const getData = async () =>{
+  const user = authService.getCurrentUser()
+      const token = user.token
+  const res = await fetch(`http://localhost:8001/api/merchant/completeProfile`,{ headers: {"Authorization" : `Bearer ${token}`} })
+    const data = await res.json();
+    console.log("data,found", data);
+    setData(data)
+    setUsers(data)
+    
+  }
+  nameUserId = users.name;
+
+  let userEmailIdFOUND = users.email;
+  userBankName = users.bankName;
+
+  let userAccountNumber = users.accountNumber;
+
+  let userBusinessName = users.businessName ;
+
+  let userSwiftCode = users.swiftCode;
+
+  let userPhoneNumber = users.phoneNumber;
+
+   let userProfilePic = users.profilePic;
+
+  console.log("fffffgkggkgk,,",nameUserId)
+
+  useEffect(() => {
+     getData()
+  },[])
+
+
+
+const { register, handleSubmit  ,setValue ,reset} =  useForm({  defaultValues: 
+  {
+    name : `${nameUserId}`,
+    businessName : `${userBusinessName}`,
+    accountNumber : `${userAccountNumber}` ,
+    bankName : `${userBankName}`,
+    swiftCode : `${userSwiftCode}`,
+    phoneNumber : `${userPhoneNumber}`
+}
+});
+
+useEffect(() => {
+  reset({  
+    name : `${nameUserId}`,
+    businessName : `${userBusinessName}`,
+    accountNumber : `${userAccountNumber}` ,
+    bankName : `${userBankName}`,
+    swiftCode : `${userSwiftCode}`,
+    phoneNumber : `${userPhoneNumber}`
+ });
+},[users])
+
+
+
   const fileInput = useRef("");
 
   async function submitHandler(data) {
@@ -51,16 +98,18 @@ export const ProfileComponent = (props) => {
       fd.append(key, data[key]); // formdata doesn't take objects
     }
 
+ console.log("fd" , data.name)
+
     fd.append(
       "image",
       fileInput.current.files[0],
       fileInput.current.files[0].name
     );
 
-    // fd.append("email", userEmailIdentity);
+  fd.append("email", userEmailIdFOUND);
 
     axios
-      .post("https://payoman.com/api/merchant/profile", fd)
+      .post("http://localhost:8001/api/merchant/profile", fd)
       .then((res) => {
         console.log(res.data);
         toast.success(`profile details added sucessfully !`);
@@ -98,7 +147,7 @@ export const ProfileComponent = (props) => {
                 <a href="Sidebar">
                   <i className="fa fa-arrow-left mr-3"></i>
                 </a>
-                Profile
+                Profile 
               </div>
             </div>
           </div>
@@ -108,13 +157,13 @@ export const ProfileComponent = (props) => {
           <div className="container ">
             <div className="row">
               <div className="col-md-12">
-                <form  className="mt-3 ">
+              <form onSubmit={handleSubmit(submitHandler)}  className="mt-3 ">
                   <div
                     className="preview-img text-center  "
                     data-holder-rendered="true"
                   >
                     <img
-                    //   src={`${baseUrl}/${userProfileData.profilePic}`}
+                    src={`${baseUrl}/${userProfilePic}`}
                       alt=""
                       className="rounded-circle z-depth-2 img-fluid "
                       width="200"
@@ -134,7 +183,7 @@ export const ProfileComponent = (props) => {
                   <div className="form-group">
                     <label for="" clas="">
                       {" "}
-                      Name{" "}
+                      Name{" "} 
                     </label>
                     <input
                       type="text"
@@ -229,12 +278,9 @@ export const ProfileComponent = (props) => {
                     />
                   </div>
 
-                  <input
-                    type="submit"
-                    className="submit-btn form-control success-btn"
-                    value="update profile"
-                    placeholder="Save"
-                  />
+                  <div className="form-group">
+              <input type="submit" className="form-control success-btn"  value="Update Profile" />
+          </div>
                 </form>
               </div>
             </div>
