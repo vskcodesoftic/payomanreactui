@@ -40,7 +40,7 @@ const ProfilePage =  (props) => {
        getData()
     }, [])
 
-         
+    //profile page     
     return (
         <div>
             <ProfileComponent profileData={Data} name={Data.name}  dext="hello"/>
