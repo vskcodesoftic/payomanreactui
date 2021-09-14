@@ -87,12 +87,7 @@ useEffect(() => {
   const fileInput = useRef("");
 
   async function submitHandler(data) {
-    console.log(
-      "onSubmitFn:",
-      data,
-      "  imageFile: ",
-      fileInput.current.files[0].name
-    );
+ 
     const fd = new FormData();
     for (var key in data) {
       fd.append(key, data[key]); // formdata doesn't take objects
@@ -100,12 +95,20 @@ useEffect(() => {
 
  console.log("fd" , data.name)
 
+  if(fileInput.current.length === undefined){
+    console.log("undefined 0")
+  }
+ 
+  if(fileInput.current.files[0]){
+    console.log("defiened 0")
     fd.append(
       "image",
       fileInput.current.files[0],
-      fileInput.current.files[0].name
+      fileInput.current.files[0].name 
     );
 
+  }
+   
   fd.append("email", userEmailIdFOUND);
 
     axios
@@ -172,7 +175,6 @@ useEffect(() => {
                   </div>
                   <div className="form form-group mt-3">
                     <input
-                      required
                       multiple
                       ref={fileInput}
                       type="file"
