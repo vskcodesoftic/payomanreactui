@@ -60,7 +60,7 @@ const Routes = () => {
               <ProtectedRoute exact path='/profile' component={ProfilePage} />
               <ProtectedRoute exact path = '/receivedAmounts' component={RecievedAmountsPage}  />
               <ProtectedRoute exact path = '/sidebar' component={Sidebar}  />
-               <ProtectedRoute exact path ='/signup' component={SignupComponent} />
+               <Route exact path ='/signup' component={SignupComponent} />
                <ProtectedRoute exact path ='/changePassword' component={ChangePasswordComponent} />
                <ProtectedRoute exact path ='/privacyPolicy' component={PrivacyPolicy} />
                <ProtectedRoute exact path ='/support' component={SupportPage} />

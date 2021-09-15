@@ -1,7 +1,8 @@
 import axios from "axios";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from "rxjs";
+import { history } from "../_helpers/history";
 
-const API_URL = "http://localhost:8001/api/merchant/";
+const API_URL = "https://payoman.com/api/merchant/";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -11,15 +12,16 @@ const register = (username, email, password) => {
   });
 };
 
-const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+const currentUserSubject = new BehaviorSubject(
+  JSON.parse(localStorage.getItem("currentUser"))
+);
 
 export const authenticationService = {
-    currentUser: currentUserSubject.asObservable(),
-    get currentUserValue () { return currentUserSubject.value }
+  currentUser: currentUserSubject.asObservable(),
+  get currentUserValue() {
+    return currentUserSubject.value;
+  },
 };
-
-
-
 
 const login = (email, password) => {
   return axios
@@ -28,7 +30,7 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      console.log("data",response.data)
+      console.log("data", response.data);
       if (response.data) {
         localStorage.setItem("userData", JSON.stringify(response.data));
       }
@@ -37,9 +39,11 @@ const login = (email, password) => {
     });
 };
 
+
 const logout = () => {
   localStorage.removeItem("userData");
-  window.location.replace('/auth')
+  history.push("/auth");
+  window.location.reload()
 };
 
 const getCurrentUser = () => {

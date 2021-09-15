@@ -1,4 +1,4 @@
-import React ,{ useRef} from 'react'
+import React, { useRef } from "react";
 
 import axios from "axios";
 
@@ -6,53 +6,54 @@ import { useForm } from "react-hook-form";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useHistory } from "react-router";
 
 function SignupComponent() {
-    const { register, handleSubmit } = useForm();
-    const emailInputRef = useRef("");
-    const passwordInputRef = useRef("");
-    const fullNameInputRef = useRef("");
-    const countrycodeInputRef = useRef("");
-    const phoneInputRef = useRef("");
-    const businessNameInputRef = useRef("");
-    const retypepasswordInputRef = useRef("");
-  
-  
-    async function submitHandler(data) {
-      const entredPassword = await data.password;
-  
-      const entredretypepassword = retypepasswordInputRef.current.value;
-  
-      if (entredPassword !== entredretypepassword) {
-        toast.warn("Passwords don't match");
-        return;
-      }
-  
-      console.log(data.email);
-  
-      axios
-        .post("https://payoman.com/api/merchant/signup", data)
-        .then((res) => {
-          console.log(res.data);
-          toast.success(`merchant Added sucessfully !`);
-          // setSpinner(false);
-          // setredirect(true);
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error(
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-              "signup Failed"
-          );
-        });
+  const history = useHistory();
+  const { register, handleSubmit } = useForm();
+  const emailInputRef = useRef("");
+  const passwordInputRef = useRef("");
+  const fullNameInputRef = useRef("");
+  const countrycodeInputRef = useRef("");
+  const phoneInputRef = useRef("");
+  const businessNameInputRef = useRef("");
+  const retypepasswordInputRef = useRef("");
+
+  async function submitHandler(data) {
+    const entredPassword = await data.password;
+
+    const entredretypepassword = retypepasswordInputRef.current.value;
+
+    if (entredPassword !== entredretypepassword) {
+      toast.warn("Passwords don't match");
+      return;
     }
-  
-    return (
-        <div>
-               <main>
+
+    console.log(data.email);
+
+    axios
+      .post("https://payoman.com/api/merchant/signup", data)
+      .then((res) => {
+        console.log(res.data);
+        toast.success(`merchant Added sucessfully !`);
+        // setSpinner(false);
+        // setredirect(true);
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            "signup Failed"
+        );
+      });
+  }
+
+  return (
+    <div>
+      <main>
         <div className="nav">
           <div className="container mt-2 mb-2">
             <div className="row">
@@ -170,9 +171,8 @@ function SignupComponent() {
           </div>
         </div>
       </main>
-    
-        </div>
-    )
+    </div>
+  );
 }
 
-export default SignupComponent
+export default SignupComponent;

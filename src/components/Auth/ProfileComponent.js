@@ -5,38 +5,36 @@ import { useForm } from "react-hook-form";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import authService, { authenticationService } from "../../_services/auth.service";
+import authService, {
+  authenticationService,
+} from "../../_services/auth.service";
 
+export const ProfileComponent = (props) => {
+  const baseUrl = "https://payoman.com";
 
+  //   const userEmailIdentity = props.userEmailId;
 
+  const nameUser = props.name;
+  console.log("name prop", nameUser);
+  const [Data, setData] = useState("");
 
-export const ProfileComponent =  (props) => {
+  const [users, setUsers] = useState({ email: "", name: "" });
 
-  
-  const baseUrl = "http://localhost:8001";
- 
+  let nameUserId;
+  let userBankName;
 
-//   const userEmailIdentity = props.userEmailId;
-
-const nameUser = props.name;
-console.log("name prop", nameUser)
-const [Data, setData] = useState('')
-
-const [users, setUsers] = useState({ email: "", name: '' });
-
-let nameUserId ;
-let userBankName ;
-
-const getData = async () =>{
-  const user = authService.getCurrentUser()
-      const token = user.token
-  const res = await fetch(`http://localhost:8001/api/merchant/completeProfile`,{ headers: {"Authorization" : `Bearer ${token}`} })
+  const getData = async () => {
+    const user = authService.getCurrentUser();
+    const token = user.token;
+    const res = await fetch(
+      `https://payoman.com/api/merchant/completeProfile`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     const data = await res.json();
     console.log("data,found", data);
-    setData(data)
-    setUsers(data)
-    
-  }
+    setData(data);
+    setUsers(data);
+  };
   nameUserId = users.name;
 
   let userEmailIdFOUND = users.email;
@@ -44,75 +42,69 @@ const getData = async () =>{
 
   let userAccountNumber = users.accountNumber;
 
-  let userBusinessName = users.businessName ;
+  let userBusinessName = users.businessName;
 
   let userSwiftCode = users.swiftCode;
 
   let userPhoneNumber = users.phoneNumber;
 
-   let userProfilePic = users.profilePic;
+  let userProfilePic = users.profilePic;
 
-  console.log("fffffgkggkgk,,",nameUserId)
+  console.log("fffffgkggkgk,,", nameUserId);
 
   useEffect(() => {
-     getData()
-  },[])
+    getData();
+  }, []);
 
+  const { register, handleSubmit, setValue, reset } = useForm({
+    defaultValues: {
+      name: `${nameUserId}`,
+      businessName: `${userBusinessName}`,
+      accountNumber: `${userAccountNumber}`,
+      bankName: `${userBankName}`,
+      swiftCode: `${userSwiftCode}`,
+      phoneNumber: `${userPhoneNumber}`,
+    },
+  });
 
-
-const { register, handleSubmit  ,setValue ,reset} =  useForm({  defaultValues: 
-  {
-    name : `${nameUserId}`,
-    businessName : `${userBusinessName}`,
-    accountNumber : `${userAccountNumber}` ,
-    bankName : `${userBankName}`,
-    swiftCode : `${userSwiftCode}`,
-    phoneNumber : `${userPhoneNumber}`
-}
-});
-
-useEffect(() => {
-  reset({  
-    name : `${nameUserId}`,
-    businessName : `${userBusinessName}`,
-    accountNumber : `${userAccountNumber}` ,
-    bankName : `${userBankName}`,
-    swiftCode : `${userSwiftCode}`,
-    phoneNumber : `${userPhoneNumber}`
- });
-},[users])
-
-
+  useEffect(() => {
+    reset({
+      name: `${nameUserId}`,
+      businessName: `${userBusinessName}`,
+      accountNumber: `${userAccountNumber}`,
+      bankName: `${userBankName}`,
+      swiftCode: `${userSwiftCode}`,
+      phoneNumber: `${userPhoneNumber}`,
+    });
+  }, [users]);
 
   const fileInput = useRef("");
 
   async function submitHandler(data) {
- 
     const fd = new FormData();
     for (var key in data) {
       fd.append(key, data[key]); // formdata doesn't take objects
     }
 
- console.log("fd" , data.name)
+    console.log("fd", data.name);
 
-  if(fileInput.current.length === undefined){
-    console.log("undefined 0")
-  }
- 
-  if(fileInput.current.files[0]){
-    console.log("defiened 0")
-    fd.append(
-      "image",
-      fileInput.current.files[0],
-      fileInput.current.files[0].name 
-    );
+    if (fileInput.current.length === undefined) {
+      console.log("undefined 0");
+    }
 
-  }
-   
-  fd.append("email", userEmailIdFOUND);
+    if (fileInput.current.files[0]) {
+      console.log("defiened 0");
+      fd.append(
+        "image",
+        fileInput.current.files[0],
+        fileInput.current.files[0].name
+      );
+    }
+
+    fd.append("email", userEmailIdFOUND);
 
     axios
-      .post("http://localhost:8001/api/merchant/profile", fd)
+      .post("https://payoman.com/api/merchant/profile", fd)
       .then((res) => {
         console.log(res.data);
         toast.success(`profile details added sucessfully !`);
@@ -140,9 +132,9 @@ useEffect(() => {
     document.getElementById("main").style.marginLeft = "250px";
   };
 
-    return (
-        <div>
-               <div>
+  return (
+    <div>
+      <div>
         <div className="navbar-sec p-1">
           <div className="container mt-2 mb-2">
             <div className="row">
@@ -150,7 +142,7 @@ useEffect(() => {
                 <a href="Sidebar">
                   <i className="fa fa-arrow-left mr-3"></i>
                 </a>
-                Profile 
+                Profile
               </div>
             </div>
           </div>
@@ -160,13 +152,13 @@ useEffect(() => {
           <div className="container ">
             <div className="row">
               <div className="col-md-12">
-              <form onSubmit={handleSubmit(submitHandler)}  className="mt-3 ">
+                <form onSubmit={handleSubmit(submitHandler)} className="mt-3 ">
                   <div
                     className="preview-img text-center  "
                     data-holder-rendered="true"
                   >
                     <img
-                    src={`${baseUrl}/${userProfilePic}`}
+                      src={`${baseUrl}/${userProfilePic}`}
                       alt=""
                       className="rounded-circle z-depth-2 img-fluid "
                       width="200"
@@ -185,7 +177,7 @@ useEffect(() => {
                   <div className="form-group">
                     <label for="" clas="">
                       {" "}
-                      Name{" "} 
+                      Name{" "}
                     </label>
                     <input
                       type="text"
@@ -281,17 +273,20 @@ useEffect(() => {
                   </div>
 
                   <div className="form-group">
-              <input type="submit" className="form-control success-btn"  value="Update Profile" />
-          </div>
+                    <input
+                      type="submit"
+                      className="form-control success-btn"
+                      value="Update Profile"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default ProfileComponent
+export default ProfileComponent;

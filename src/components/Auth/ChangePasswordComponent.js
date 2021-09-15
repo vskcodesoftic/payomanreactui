@@ -4,50 +4,51 @@ import axios from "axios";
 
 import { useForm } from "react-hook-form";
 
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import authService, {
+  authenticationService,
+} from "../../_services/auth.service";
 
 export const ChangePasswordComponent = (props) => {
   const { register, handleSubmit } = useForm();
-
-
+  const user = authService.getCurrentUser();
+  const userEmailIdentity = user.email;
   const fileInput = useRef("");
-//   const userEmailIdentity = props.userEmailId;
-//   console.log("emailid", userEmailIdentity);
+
   const RetypePasswordRef = useRef("");
 
-//   async function submitHandler(data) {
-//     const newdata = { ...data, email: userEmailIdentity };
+  async function submitHandler(data) {
+    const newdata = { ...data, email: userEmailIdentity };
 
-//     const entredPassword = await data.newpassword;
+    const entredPassword = await data.newpassword;
 
-//     const entredretypepassword = RetypePasswordRef.current.value;
+    const entredretypepassword = RetypePasswordRef.current.value;
 
-//     if (entredPassword !== entredretypepassword) {
-//       toast.warn("new Password and confirm password don't match");
-//       return;
-//     }
+    if (entredPassword !== entredretypepassword) {
+      toast.warn("new Password and confirm password don't match");
+      return;
+    }
 
-//     axios
-//       .post("https://payoman.com/api/merchant/updatepassword", newdata)
-//       .then((res) => {
-//         console.log(res.data);
-//         toast.success(`password updated sucessfully !`);
-//         // setSpinner(false);
-//         // setredirect(true);
-//         signOut();
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//         toast.error(
-//           (error.response &&
-//             error.response.data &&
-//             error.response.data.message) ||
-//             "password updation Failed"
-//         );
-//       });
-//   }
+    axios
+      .post("https://payoman.com/api/merchant/updatepassword", newdata)
+      .then((res) => {
+        console.log(res.data);
+        toast.success(`password updated sucessfully !`);
+        // setSpinner(false);
+        // setredirect(true);
+        authService.logout();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            "password updation Failed"
+        );
+      });
+  }
 
   const closeNav = () => {
     document.getElementById("mySidebar").style.width = "0";
@@ -59,9 +60,9 @@ export const ChangePasswordComponent = (props) => {
     document.getElementById("main").style.marginLeft = "250px";
   };
 
-    return (
-        <div>
-                <div>
+  return (
+    <div>
+      <div>
         <div className="navbar-sec p-1">
           <div className="container mt-2 mb-2">
             <div className="row">
@@ -79,7 +80,7 @@ export const ChangePasswordComponent = (props) => {
           <div className="container ">
             <div className="row">
               <div className="col-md-12">
-              <form  className="mt-3 ">
+                <form onSubmit={handleSubmit(submitHandler)} className="mt-3 ">
                   <div className="form-group">
                     <label for="" clas="">
                       {" "}
@@ -92,7 +93,7 @@ export const ChangePasswordComponent = (props) => {
                       })}
                       className="form-control input-box"
                       id="fname"
-                      placeholder=""
+                      placeholder="old password"
                     />
                   </div>
 
@@ -109,7 +110,7 @@ export const ChangePasswordComponent = (props) => {
                       className="form-control 
                           input-box"
                       id="phone"
-                      placeholder=""
+                      placeholder="new password"
                     />
                   </div>
 
@@ -124,15 +125,15 @@ export const ChangePasswordComponent = (props) => {
                       className="form-control 
                           input-box"
                       id="phone"
-                      placeholder=""
+                      placeholder="re enter password"
                     />
                   </div>
 
                   <input
                     type="submit"
                     className="submit-btn form-control success-btn"
-                    value="Save"
-                    placeholder="Save"
+                    value="update password"
+                    placeholder="update password"
                   />
                 </form>
               </div>
@@ -140,9 +141,8 @@ export const ChangePasswordComponent = (props) => {
           </div>
         </div>
       </div>
-    
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default ChangePasswordComponent
+export default ChangePasswordComponent;

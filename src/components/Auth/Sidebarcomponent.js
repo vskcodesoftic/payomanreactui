@@ -1,10 +1,11 @@
 import React from 'react'
-
+import Logo from '../images/logo.svg'
 
 import {
   Link
   } from "react-router-dom";
 import authService from '../../_services/auth.service';
+
 
 export default function SideBarComponent() {
 
@@ -33,7 +34,7 @@ export default function SideBarComponent() {
     <div className="row logo-raw code-scaner-container mb-4">
         <div className="col-md-12">
            <div className="col-md-12 text-center logo-column-2 pt-3">
-               <img src="images/logo.svg" alt="" />
+               <img src={Logo} alt="logo" />
            </div>
         </div>
         <div className="col-md-12">
@@ -49,7 +50,7 @@ export default function SideBarComponent() {
                 <div className=" " id="collapsibleNavbar">
                     <ul className="navbar-nav">
                       <li className="nav-item mt-3 ">
-                        <Link to="/"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
+                        <Link to="/dashboard"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>
                       <li className="nav-item mt-3">
                       <Link to="/profile"><a className="nav-link"><i className="fas fa-user mr-3"></i>  Profile <i className="fa fa-chevron-right float-right"></i></a></Link>
