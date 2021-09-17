@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom'
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,7 +32,7 @@ export const ChangePasswordComponent = (props) => {
     }
 
     axios
-      .post("http://localhost:8001/api/merchant/updatepassword", newdata)
+      .post("https://payoman.com/api/merchant/updatepassword", newdata)
       .then((res) => {
         console.log(res.data);
         toast.success(`password updated sucessfully !`);
@@ -67,9 +68,9 @@ export const ChangePasswordComponent = (props) => {
           <div className="container mt-2 mb-2">
             <div className="row">
               <div className="col-md-12 nav-link-new font-weight-bold">
-                <a href="Sidebar">
+                 <Link to="/Sidebar">
                   <i className="fa fa-arrow-left mr-3"></i>
-                </a>
+                </Link>
                 change password
               </div>
             </div>

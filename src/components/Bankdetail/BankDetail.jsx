@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import authService from "../../_services/auth.service";
+import { Link } from 'react-router-dom'
 
 export const BankDetailComponent = (props) => {
-  const baseUrl = "http://localhost:8001";
+  const baseUrl = "https://payoman.com";
 
   //   const userEmailIdentity = props.userEmailId;
 
@@ -25,7 +26,7 @@ export const BankDetailComponent = (props) => {
     const user = authService.getCurrentUser();
     const token = user.token;
     const res = await fetch(
-      `http://localhost:8001/api/merchant/completeProfile`,
+      `https://payoman.com/api/merchant/completeProfile`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = await res.json();
@@ -36,15 +37,15 @@ export const BankDetailComponent = (props) => {
   nameUserId = users.name;
 
   let userEmailIdFOUND = users.email;
-  userBankName = users.bankName || 'enter bank name';
+  userBankName = users.bankName || "enter bank name";
 
-  let userAccountNumber = users.accountNumber || 'enter account number';
+  let userAccountNumber = users.accountNumber || "enter account number";
 
-  let userBusinessName = users.businessName || 'enter business name';
+  let userBusinessName = users.businessName || "enter business name";
 
-  let userSwiftCode = users.swiftCode || 'enter swift code';
+  let userSwiftCode = users.swiftCode || "enter swift code";
 
-  let userPhoneNumber = users.phoneNumber || 'enter contact number';
+  let userPhoneNumber = users.phoneNumber || "enter contact number";
 
   let userProfilePic = users.profilePic;
 
@@ -87,7 +88,7 @@ export const BankDetailComponent = (props) => {
     fd.append("email", userEmailIdFOUND);
 
     axios
-      .post("http://localhost:8001/api/merchant/profile", fd)
+      .post("https://payoman.com/api/merchant/profile", fd)
       .then((res) => {
         console.log(res.data);
         toast.success(`profile details added sucessfully !`);
@@ -121,9 +122,9 @@ export const BankDetailComponent = (props) => {
         <div className="container mt-2 mb-2">
           <div className="row">
             <div className="col-md-12 nav-link-new font-weight-bold">
-              <a href="Sidebar">
-                <i className="fa fa-arrow-left mr-3"></i>
-              </a>
+                 <Link to="/Sidebar">
+                  <i className="fa fa-arrow-left mr-3"></i>
+                </Link>
               Bank Details
             </div>
           </div>

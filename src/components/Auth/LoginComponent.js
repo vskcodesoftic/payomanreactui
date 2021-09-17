@@ -73,7 +73,7 @@ const history = useHistory()
           <div className="form-group">
               <input type="submit" className="form-control success-btn"  value="Sign in" placeholder="Sing in" />
           </div>
-          <p className="text-center mb-4 mt-5  forgot-sec"><a href="/forgetPassword">Forgot Password ?</a></p>
+          <p className="text-center mb-4 mt-5  forgot-sec"><Link to="/forgetPassword">Forgot Password ?</Link></p>
           
        </form>
        <div className="signup-btn text-center mb-5">

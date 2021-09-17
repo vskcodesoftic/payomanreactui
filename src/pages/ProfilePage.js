@@ -5,7 +5,7 @@ import axios from "axios";
 
 const ProfilePage = (props) => {
   const [Data, setData] = useState("");
-  const baseUrl = "http://localhost:8001/api/merchant";
+  const baseUrl = "https://payoman.com/api/merchant";
   // const userProfileData =  async () =>{
   //    const user = authService.getCurrentUser()
   //     const token = user.token

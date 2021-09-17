@@ -5,6 +5,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom'
 
 const ForgetPassword = () => {
   const { register, handleSubmit } = useForm();
@@ -14,7 +15,7 @@ const ForgetPassword = () => {
     const userEmail = data.email;
 
     axios
-      .post("http://localhost:8001/api/merchant/forgetPassword", data)
+      .post("https://payoman.com/api/merchant/forgetPassword", data)
       .then((res) => {
         console.log(res);
       })
@@ -30,9 +31,9 @@ const ForgetPassword = () => {
         <div class="container mt-2 mb-2">
           <div class="row">
             <div class="col-md-12 nav-link text-white">
-              <a href="/">
-                <i class="fa fa-arrow-left mr-3"></i>
-              </a>
+                <Link to="/">
+                  <i className="fa fa-arrow-left mr-3"></i>
+                </Link>
               Forgot Password
             </div>
           </div>

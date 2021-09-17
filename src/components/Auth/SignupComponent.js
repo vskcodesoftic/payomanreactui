@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router";
 
+import { Link } from 'react-router-dom'
+
 function SignupComponent() {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
@@ -32,7 +34,7 @@ function SignupComponent() {
     console.log(data.email);
 
     axios
-      .post("http://localhost:8001/api/merchant/signup", data)
+      .post("https://payoman.com/api/merchant/signup", data)
       .then((res) => {
         console.log(res.data);
         toast.success(`merchant Added sucessfully !`);
@@ -58,9 +60,9 @@ function SignupComponent() {
           <div className="container mt-2 mb-2">
             <div className="row">
               <div className="col-md-12 nav-link text-white">
-                <a href="Sidebar">
+                 <Link to="/Sidebar">
                   <i className="fa fa-arrow-left mr-3" />
-                </a>
+                </Link>
                 Sign Up
               </div>
             </div>

@@ -30,7 +30,7 @@ const DashboardComponent = () => {
           const token = user.token;
         
           const getData = () => {
-            axios.get("http://localhost:8001/api/merchant/getListOfPayments",  {
+            axios.get("https://payoman.com/api/merchant/getListOfPayments",  {
               headers: { Authorization: `Bearer ${token}` },
             } )
             .then(res => {
