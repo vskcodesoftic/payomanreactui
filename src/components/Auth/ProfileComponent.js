@@ -10,7 +10,7 @@ import authService, {
 } from "../../_services/auth.service";
 
 export const ProfileComponent = (props) => {
-  const baseUrl = "https://payoman.com";
+  const baseUrl = "http://localhost:8001";
 
   //   const userEmailIdentity = props.userEmailId;
 
@@ -27,7 +27,7 @@ export const ProfileComponent = (props) => {
     const user = authService.getCurrentUser();
     const token = user.token;
     const res = await fetch(
-      `https://payoman.com/api/merchant/completeProfile`,
+      `http://localhost:8001/api/merchant/completeProfile`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = await res.json();
@@ -78,33 +78,36 @@ export const ProfileComponent = (props) => {
     });
   }, [users]);
 
+  
   const fileInput = useRef("");
 
   async function submitHandler(data) {
+ 
     const fd = new FormData();
     for (var key in data) {
       fd.append(key, data[key]); // formdata doesn't take objects
     }
 
-    console.log("fd", data.name);
+ console.log("fd" , data.name)
 
-    if (fileInput.current.length === undefined) {
-      console.log("undefined 0");
-    }
+  if(fileInput.current.length === undefined){
+    console.log("undefined 0")
+  }
+ 
+  if(fileInput.current.files[0]){
+    console.log("defiened 0")
+    fd.append(
+      "image",
+      fileInput.current.files[0],
+      fileInput.current.files[0].name 
+    );
 
-    if (fileInput.current.files[0]) {
-      console.log("defiened 0");
-      fd.append(
-        "image",
-        fileInput.current.files[0],
-        fileInput.current.files[0].name
-      );
-    }
-
-    fd.append("email", userEmailIdFOUND);
+  }
+   
+  fd.append("email", userEmailIdFOUND);
 
     axios
-      .post("https://payoman.com/api/merchant/profile", fd)
+      .post("http://localhost:8001/api/merchant/profile", fd)
       .then((res) => {
         console.log(res.data);
         toast.success(`profile details added sucessfully !`);

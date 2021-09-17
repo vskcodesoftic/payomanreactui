@@ -1,8 +1,11 @@
 import React, { createContext } from 'react'
 
 import { useState , useRef } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory  } from 'react-router';
 
+import {
+    Link
+    } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,7 +17,6 @@ const LoginComponent = (props) => {
 const history = useHistory()
     const emailInputRef = useRef('')
     const passwordInputRef = useRef('')
-
 
 
     async function submitHandler(event){
@@ -71,11 +73,12 @@ const history = useHistory()
           <div className="form-group">
               <input type="submit" className="form-control success-btn"  value="Sign in" placeholder="Sing in" />
           </div>
-          <p className="text-center mb-4 mt-5  forgot-sec"><a href="forgotpassword.html">Forgot Password ?</a></p>
-          <div className="signup-btn text-center">
-              <button className="btn btn-link"><a href="/signup">Sign Up</a></button>
-          </div>
+          <p className="text-center mb-4 mt-5  forgot-sec"><a href="/forgetPassword">Forgot Password ?</a></p>
+          
        </form>
+       <div className="signup-btn text-center">
+              <button className="btn btn-link"><Link to="/signup">Sign Up</Link></button>
+          </div>
    </div>
       </main>
         </div>

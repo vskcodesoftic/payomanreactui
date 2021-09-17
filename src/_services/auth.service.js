@@ -2,7 +2,7 @@ import axios from "axios";
 import { BehaviorSubject } from "rxjs";
 import { history } from "../_helpers/history";
 
-const API_URL = "https://payoman.com/api/merchant/";
+const API_URL = "http://localhost:8001/api/merchant/";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -39,11 +39,9 @@ const login = (email, password) => {
     });
 };
 
-
 const logout = () => {
   localStorage.removeItem("userData");
-  history.push("/auth");
-  window.location.reload()
+  window.location.reload();
 };
 
 const getCurrentUser = () => {

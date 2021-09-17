@@ -140,7 +140,7 @@ const DashboardComponent = () => {
                       </li> 
                        
                       <li className="nav-item mt-3">
-                      <Link to="/ReceivedAmount"><a className="nav-link" ><i className="fas fa-money mr-3"></i> Received Amounts <i className="fa fa-chevron-right float-right"></i></a></Link>
+                      <Link to="/receivedAmounts"><a className="nav-link" ><i className="fas fa-money mr-3"></i> Received Amounts <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li> 
                       <li className="nav-item mt-3">
                       <Link to="/ChangePassword"><a className="nav-link" ><i className="fas fa-key mr-3"></i> Change Password <i className="fa fa-chevron-right float-right"></i></a></Link>

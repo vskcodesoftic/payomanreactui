@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import authService from "../../_services/auth.service";
 
 export const BankDetailComponent = (props) => {
-  const baseUrl = "https://payoman.com";
+  const baseUrl = "http://localhost:8001";
 
   //   const userEmailIdentity = props.userEmailId;
 
@@ -25,7 +25,7 @@ export const BankDetailComponent = (props) => {
     const user = authService.getCurrentUser();
     const token = user.token;
     const res = await fetch(
-      `https://payoman.com/api/merchant/completeProfile`,
+      `http://localhost:8001/api/merchant/completeProfile`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = await res.json();
@@ -87,7 +87,7 @@ export const BankDetailComponent = (props) => {
     fd.append("email", userEmailIdFOUND);
 
     axios
-      .post("https://payoman.com/api/merchant/profile", fd)
+      .post("http://localhost:8001/api/merchant/profile", fd)
       .then((res) => {
         console.log(res.data);
         toast.success(`profile details added sucessfully !`);

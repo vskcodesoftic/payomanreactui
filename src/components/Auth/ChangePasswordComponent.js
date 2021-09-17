@@ -31,7 +31,7 @@ export const ChangePasswordComponent = (props) => {
     }
 
     axios
-      .post("https://payoman.com/api/merchant/updatepassword", newdata)
+      .post("http://localhost:8001/api/merchant/updatepassword", newdata)
       .then((res) => {
         console.log(res.data);
         toast.success(`password updated sucessfully !`);

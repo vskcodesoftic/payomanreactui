@@ -32,7 +32,7 @@ function SignupComponent() {
     console.log(data.email);
 
     axios
-      .post("https://payoman.com/api/merchant/signup", data)
+      .post("http://localhost:8001/api/merchant/signup", data)
       .then((res) => {
         console.log(res.data);
         toast.success(`merchant Added sucessfully !`);
