@@ -76,7 +76,7 @@ const history = useHistory()
           <p className="text-center mb-4 mt-5  forgot-sec"><a href="/forgetPassword">Forgot Password ?</a></p>
           
        </form>
-       <div className="signup-btn text-center">
+       <div className="signup-btn text-center mb-5">
               <button className="btn btn-link"><Link to="/signup">Sign Up</Link></button>
           </div>
    </div>

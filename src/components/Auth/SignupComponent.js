@@ -68,7 +68,7 @@ function SignupComponent() {
         </div>
         <ToastContainer />
 
-        <div className="container signup-container">
+        <div className="container signup-container mt-5">
           <div className="row">
             <div className="col-md-12">
               <form onSubmit={handleSubmit(submitHandler)}>

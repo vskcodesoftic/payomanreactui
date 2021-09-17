@@ -38,15 +38,15 @@ export const ProfileComponent = (props) => {
   nameUserId = users.name;
 
   let userEmailIdFOUND = users.email;
-  userBankName = users.bankName;
+  userBankName = users.bankName || 'enter bank name';
 
-  let userAccountNumber = users.accountNumber;
+  let userAccountNumber = users.accountNumber || 'enter account number';
 
-  let userBusinessName = users.businessName;
+  let userBusinessName = users.businessName || 'enter business name';
 
-  let userSwiftCode = users.swiftCode;
+  let userSwiftCode = users.swiftCode || 'enter bank swift code';
 
-  let userPhoneNumber = users.phoneNumber;
+  let userPhoneNumber = users.phoneNumber || 'enter contact number';
 
   let userProfilePic = users.profilePic;
 

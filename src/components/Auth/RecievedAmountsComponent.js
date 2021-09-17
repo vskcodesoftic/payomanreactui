@@ -1,6 +1,34 @@
-import React from 'react'
+import React ,{ useEffect , useState  } from 'react'
+import axios from 'axios';
+import authService from '../../_services/auth.service';
+
+
 
 const RecievedAmountsComponent = () => {
+
+  const [data, setdata] = useState([])
+  const user = authService.getCurrentUser();
+  const token = user.token;
+
+  const getData = () => {
+    axios.get("http://localhost:8001/api/merchant/getListOfPayments",  {
+      headers: { Authorization: `Bearer ${token}` },
+    } )
+    .then(res => {
+      console.log(res.data.payments)
+      const Data = res.data.payments
+      setdata(Data)
+    })
+    .catch(err => {
+      console.error(err); 
+    })
+  }
+ 
+
+
+  useEffect(() => {
+   getData()
+  }, [])
     return (
         <div>
             
@@ -15,68 +43,37 @@ const RecievedAmountsComponent = () => {
         </div>
     </div>  
 
-    <div className="container">
-        <div className="row text-center mt-5" >
-            <div className="col-md-12 mb-4">
-               <button className="received-money-button pt-1 pb-1 pr-3 pl-3">Receivd Transection</button>
-           </div>
-       </div>
-        <div className="row  pt-3 pb-3 mt-3" >
-           <div className="col-sm-12">
-              <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-              <p className="text-right"> $312</p>    
-           </div>
-           <div className="col-sm-12">
-             <p className="float-left">ABC Company</p>
-          </div>
-          <div className="col-sm-12">
-             <p className="float-left">03-09-2021 | 11:10 AM</p>
-             <p className="text-right" >+91 8579213649</p>    
-          </div>
-        </div>
-   
-        <div className="row row pt-3 pb-3 mt-3" >
-           <div className="col-sm-12">
-             <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-             <p className="text-right" >$312</p>    
-           </div>
-           <div className="col-sm-12">
-             <p className="float-left">ABC Company</p>
-          </div>
-          <div className="col-sm-12">
-            <p className="float-left">03-09-2021 | 11:10 AM</p>
-            <p className="text-right" >+91 8579213649</p>    
-          </div>
+             <div className="container">
+             <div className="row text-center mt-5" >
+              <div className="col-md-12 mb-4">
+                 <button className="received-money-button pt-1 pb-1 pr-3 pl-3"> Transactions Made</button>
+             </div>
          </div>
-   
-         <div className="row row pt-3 pb-3 mt-3" >
-           <div className="col-sm-12">
-             <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-             <p className="text-right"> $312</p>    
-           </div>
-           <div className="col-sm-12">
-             <p className="float-left">ABC Company</p>
+      {data.map((payment) => { return (<>
+          <div>
+      
+          <div className="row  pt-3 pb-3 mt-3" >
+             <div className="col-sm-12">
+                <p className="float-left"><i className='fa fa-check-circle fa-lg'> Send to </i></p>
+                <p className="text-right"> ₹ {payment.amount}</p>    
+             </div>
+             <div className="col-sm-12">
+               <p className="float-left">{payment.merchantName} <br />
+               {payment.merchantemail} <br />
+               {payment.merchantphoneNumber}</p>
+             
+
+            </div>
+            <div className="col-sm-12">
+               <p className="float-left">{payment.time}</p>
+               <p className="text-right" >+91 8579213649</p>    
+            </div>
           </div>
-          <div className="col-sm-12">
-            <p className="float-left">03-09-2021 | 11:10 AM</p>
-            <p className="text-right" >+91 8579213649</p>    
-          </div>
-         </div>
-         <div className="row row pt-3 pb-3 mt-3" >
-           <div className="col-sm-12">
-             <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-             <p className="text-right" >$312</p>    
-           </div>
-           <div className="col-sm-12">
-             <p className="float-left">ABC Company</p>
-          </div>
-          <div className="col-sm-12">
-            <p className="float-left">03-09-2021 | 11:10 AM</p>
-            <p className="text-right" >+91 8579213649</p>    
-          </div>
-         </div>
+     </div>
+     </>)
+      })}
+     
       </div>
-  
         </div>
     )
 }

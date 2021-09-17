@@ -1,4 +1,6 @@
-import React from 'react'
+import React,{ useState , useEffect } from 'react'
+import axios from 'axios';
+
 import Logo from '../images/logo.svg'
 
 import {
@@ -20,6 +22,48 @@ export default function SideBarComponent() {
             document.getElementById("mySidebar").style.width = "100%";
             document.getElementById("main").style.marginLeft = "250px";
           }
+
+
+          const [data, setdata] = useState([])
+          const user = authService.getCurrentUser();
+          const token = user.token;
+        
+          const getData = () => {
+            axios.get("http://localhost:8001/api/merchant/getListOfPayments",  {
+              headers: { Authorization: `Bearer ${token}` },
+            } )
+            .then(res => {
+              console.log("paymets",res.data.payments)
+              const Data = res.data.payments
+              setdata(Data)
+            })
+            .catch(err => {
+              console.error(err); 
+            })
+          }
+         
+
+          const [Balance , setBalance ] = useState()
+  const getBalance = () => {
+    axios.get("http://localhost:8001/api/merchant/remainingBalance", {
+      headers: { Authorization: `Bearer ${token}` },
+    } )
+    .then(res => {
+      const Balance = res.data.Balance
+       setBalance(Balance)
+    })
+    .catch(err => {
+      console.error(err); 
+    })
+  }
+        
+          useEffect(() => {
+           getData()
+           getBalance()
+          }, [])
+        
+
+
  
   return (
     <div >
@@ -50,7 +94,7 @@ export default function SideBarComponent() {
                 <div className=" " id="collapsibleNavbar">
                     <ul className="navbar-nav">
                       <li className="nav-item mt-3 ">
-                        <Link to="/dashboard"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
+                        <Link to="/"><a className="nav-link active " ><i className="fas fa-home mr-3"></i> Dashboard <i className="fa fa-chevron-right float-right"></i></a></Link>
                       </li>
                       <li className="nav-item mt-3">
                       <Link to="/profile"><a className="nav-link"><i className="fas fa-user mr-3"></i>  Profile <i className="fa fa-chevron-right float-right"></i></a></Link>
@@ -97,7 +141,7 @@ export default function SideBarComponent() {
                           <div className='col-md-12'>
                               <div className="wallet-card text-white mt-3 text-center pb-5">
                                   <p className="pt-3 pb-5 ">Wallet</p>
-                                  <h6>Error OMR</h6>
+                                  <h6> {Balance} OMR</h6>
                               </div>
                           </div>
                        </div>
@@ -109,64 +153,38 @@ export default function SideBarComponent() {
 
                 </div>
        
-   <div className="container">
-     <div className="row row pt-3 pb-3 mt-3" >
-        <div className="col-sm-12">
-           <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-           <p className="text-right" >$312</p>    
-        </div>
-        <div className="col-sm-12">
-          <p className="float-left">ABC Company</p>
-       </div>
-       <div className="col-sm-12">
-          <p className="float-left">03-09-2021 | 11:10 AM</p>
-          <p className="text-right" >+91 8579213649</p>    
-       </div>
+                <div className="container">
+      {data.map((payment) => { return (<>
+          <div>
+          <div className="row text-center mt-5" >
+              <div className="col-md-12 mb-4">
+                 <button className="received-money-button pt-1 pb-1 pr-3 pl-3"> Transactions Made</button>
+             </div>
+         </div>
+          <div className="row  pt-3 pb-3 mt-3" >
+             <div className="col-sm-12">
+                <p className="float-left"><i className='fa fa-check-circle fa-lg'> Send to </i></p>
+                <p className="text-right">  {payment.amount} OMR</p>    
+             </div>
+             <div className="col-sm-12">
+               <p className="float-left">{payment.merchantName} <br />
+               {payment.merchantemail} <br />
+               {payment.merchantphoneNumber}</p>
+             
+
+            </div>
+            <div className="col-sm-12">
+               <p className="float-left">{payment.time}</p>
+               <p className="text-right" >+91 8579213649</p>    
+            </div>
+          </div>
      </div>
-
-     <div className="row row pt-3 pb-3 mt-3" >
-        <div className="col-sm-12">
-          <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-          <p className="text-right" >$312</p>    
-        </div>
-        <div className="col-sm-12">
-          <p className="float-left">ABC Company</p>
-       </div>
-       <div className="col-sm-12">
-         <p className="float-left">03-09-2021 | 11:10 AM</p>
-         <p className="text-right" >+91 8579213649</p>    
-       </div>
+     </>)
+      })}
+     
       </div>
 
-      <div className="row row pt-3 pb-3 mt-3" >
-        <div className="col-sm-12">
-          <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-          <p className="text-right" >$312</p>    
-        </div>
-        <div className="col-sm-12">
-          <p className="float-left">ABC Company</p>
-       </div>
-       <div className="col-sm-12">
-         <p className="float-left">03-09-2021 | 11:10 AM</p>
-         <p className="text-right" >+91 8579213649</p>    
-       </div>
-      </div>
 
-      <div className="row row pt-3 pb-3 mt-3" >
-        <div className="col-sm-12">
-          <p className="float-left"><i className='fa fa-check-circle fa-lg'> Received to </i></p>
-          <p className="text-right" >$312</p>    
-        </div>
-        <div className="col-sm-12">
-          <p className="float-left">ABC Company</p>
-       </div>
-       <div className="col-sm-12">
-         <p className="float-left">03-09-2021 | 11:10 AM</p>
-         <p className="text-right" >+91 8579213649</p>    
-       </div>
-      </div>
-      
-    </div>
   </div> 
 </main>
     </div>
